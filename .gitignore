@@ -1,0 +1,89 @@
+.metadata
+.sonarlint
+
+#### FRON ####
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+candy-car-front/dist
+candy-car-front/tmp
+candy-car-front/out-tsc
+# Only exists if Bazel was run
+candy-car-front/bazel-out
+
+# dependencies
+candy-car-front/node_modules
+
+# profiling files
+candy-car-front/chrome-profiler-events*.json
+
+# IDEs and editors
+candy-car-front//.idea
+candy-car-front/.project
+candy-car-front/.classpath
+candy-car-front/.c9/
+candy-car-front/*.launch
+candy-car-front/.settings/
+candy-car-front/*.sublime-workspace
+
+# IDE - VSCode
+candy-car-front/.vscode/*
+candy-car-front/!.vscode/settings.json
+candy-car-front/!.vscode/tasks.json
+candy-car-front/!.vscode/launch.json
+candy-car-front/!.vscode/extensions.json
+candy-car-front/.history/*
+
+# misc
+candy-car-front//.angular/cache
+candy-car-front//.sass-cache
+candy-car-front//connect.lock
+candy-car-front//coverage
+candy-car-front//libpeerconnection.log
+candy-car-front/npm-debug.log
+candy-car-front/yarn-error.log
+candy-car-front/testem.log
+candy-car-front//typings
+
+# System Files
+candy-car-front/.DS_Store
+candy-car-front/Thumbs.db
+
+
+#### BACK ####
+#### USERS ####
+
+users-candy-car-back/HELP.md
+users-candy-car-back/target/
+users-candy-car-back/.mvn
+users-candy-car-back/!.mvn/wrapper/maven-wrapper.jar
+users-candy-car-back/!**/src/main/**/target/
+users-candy-car-back/!**/src/test/**/target/
+
+### STS ###
+users-candy-car-back/.apt_generated
+users-candy-car-back/.classpath
+users-candy-car-back/.factorypath
+users-candy-car-back/.project
+users-candy-car-back/.settings
+users-candy-car-back/.springBeans
+users-candy-car-back/.sts4-cache
+
+### IntelliJ IDEA ###
+users-candy-car-back/.idea
+users-candy-car-back/*.iws
+users-candy-car-back/*.iml
+users-candy-car-back/*.ipr
+
+### NetBeans ###
+users-candy-car-back/nbproject/private/
+users-candy-car-back/nbbuild/
+users-candy-car-back/dist/
+users-candy-car-back/nbdist/
+users-candy-car-back/.nb-gradle/
+users-candy-car-back/build/
+users-candy-car-back/!**/src/main/**/build/
+users-candy-car-back/!**/src/test/**/build/
+
+### VS Code ###
+users-candy-car-back/.vscode/
