@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
 				mail: new FormControl('', Validators.compose([
 					UserMailValidator.validUserMail,
 					Validators.required,
-					Validators.email,
+					Validators.email, // TODO: Change to a regular expression method that validates the ending with . and extension
 					Validators.minLength(6),
-					Validators.maxLength(100)])),
+					Validators.maxLength(30)])),
 				password: new FormControl('', Validators.compose([
 					PasswordStrengthValidator.validPasswordStrength,
 					Validators.required,
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 		);
 	}
 
-	saveData(): void {
+	save(): void {
 		if (this.form?.value) {
 			console.log({
 				values: this.form.value

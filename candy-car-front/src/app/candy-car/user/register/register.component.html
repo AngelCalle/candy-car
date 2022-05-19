@@ -1,11 +1,12 @@
 <ng-container *ngIf="form">
 
-	<form [formGroup]="form" (ngSubmit)="saveData()" novalidate autocomplete="off">
+	<form [formGroup]="form" (ngSubmit)="save()" novalidate autocomplete="off">
 		<div>
 			<div>
 				<label for="name">Nombre:</label>
-				<input formControlName="name" name="name" nametype="text" placeholder="name"
-					/>
+				<input formControlName="name" name="name" id="name" type="text"
+					placeholder="name"
+					required minlength="3" maxlength="10" />
 			</div>
 			<div *ngIf="form.get('name')?.errors && (form.get('name')?.dirty ||
 				form.get('name')?.touched)">
@@ -18,7 +19,9 @@
 		<div>
 			<div>
 				<label for="mail">Correo:</label>
-				<input formControlName="mail" name="mail" type="text" placeholder="mail" />
+				<input formControlName="mail" name="mail" id="mail" type="email"
+					placeholder="mail"
+					required minlength="6" maxlength="30" />
 			</div>
 			<div *ngIf="form.get('mail')?.errors && (form.get('mail')?.dirty ||
 				form.get('mail')?.touched)">
@@ -34,8 +37,10 @@
 		<div>
 			<div>
 				<label for="password">Contraseña:</label>
-				<input formControlName="password" name="password" type="password"
-					placeholder="Password" autocomplete="on" />
+				<input formControlName="password" name="password" id="password"
+					type="password"
+					placeholder="Password" autocomplete="off"
+					required minlength="8" maxlength="20" />
 			</div>
 			<div *ngIf="form.get('password')?.errors && (form.get('password')?.dirty ||
 				form.get('password')?.touched)">
@@ -58,7 +63,9 @@
 			<div>
 				<label for="passwordConfirm">Confirmar Contraseña:</label>
 				<input formControlName="passwordConfirm" name="passwordConfirm"
-					type="password" placeholder="Confirm your password" autocomplete="on" />
+					id="passwordConfirm"
+					type="password" placeholder="Confirm your password" autocomplete="off"
+					required minlength="8" maxlength="20" />
 			</div>
 			<div *ngIf="form.get('passwordConfirm')?.errors &&
 				(form.get('passwordConfirm')?.dirty ||

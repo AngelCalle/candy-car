@@ -1,10 +1,11 @@
 <ng-container *ngIf="form">
 
-	<form [formGroup]="form" (ngSubmit)="saveData()" novalidate autocomplete="off">
+	<form [formGroup]="form" (ngSubmit)="save()" novalidate autocomplete="off">
 		<div>
 			<div>
 				<label for="mail">Correo:</label>
-				<input formControlName="mail" name="mail" type="text" placeholder="mail" />
+				<input formControlName="mail" name="mail" id="mail" type="email"
+					placeholder="mail" required minlength="6" maxlength="30" />
 			</div>
 			<div *ngIf="form.get('mail')?.errors && (form.get('mail')?.dirty ||
 				form.get('mail')?.touched)">
@@ -20,8 +21,9 @@
 		<div>
 			<div>
 				<label for="password">Contraseña:</label>
-				<input formControlName="password" name="password" type="password"
-					placeholder="Password" autocomplete="on" />
+				<input formControlName="password" name="password" id="password"
+					type="password" placeholder="Password" autocomplete="off" required
+					minlength="8" maxlength="20" />
 			</div>
 			<div *ngIf="form.get('password')?.errors && (form.get('password')?.dirty ||
 				form.get('password')?.touched)">

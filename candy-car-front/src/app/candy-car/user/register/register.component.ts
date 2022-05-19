@@ -25,13 +25,16 @@ export class RegisterComponent implements OnInit {
 	initForm(): void {
 		this.form = new FormGroup(
 			{
-				name: new FormControl('', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(10)])),
+				name: new FormControl('', Validators.compose([
+					Validators.required,
+					Validators.minLength(3),
+					Validators.maxLength(10)])),
 				mail: new FormControl('', Validators.compose([
 					UserMailValidator.validUserMail,
 					Validators.required,
-					Validators.email,
+					Validators.email, // TODO: Change to a regular expression method that validates the ending with . and extension
 					Validators.minLength(6),
-					Validators.maxLength(100)])),
+					Validators.maxLength(30)])),
 				password: new FormControl('', Validators.compose([
 					PasswordStrengthValidator.validPasswordStrength,
 					Validators.required,
@@ -49,7 +52,7 @@ export class RegisterComponent implements OnInit {
 			});
 	}
 
-	saveData(): void {
+	save(): void {
 		if (this.form?.value) {
 			console.log({
 				values: this.form.value
