@@ -1,0 +1,89 @@
+<ng-container *ngIf="form">
+
+	<form [formGroup]="form" (ngSubmit)="saveData()" novalidate autocomplete="off">
+		<div>
+			<div>
+				<label for="name">Nombre:</label>
+				<input formControlName="name" name="name" nametype="text" placeholder="name"
+					/>
+			</div>
+			<div *ngIf="form.get('name')?.errors && (form.get('name')?.dirty ||
+				form.get('name')?.touched)">
+				<p *ngIf="form.get('name')?.hasError('required')">Field is required</p>
+				<p *ngIf="form.get('name')?.hasError('minlength')">Min of 5 characters</p>
+				<p *ngIf="form.get('name')?.hasError('maxlength')">Max of 10 characters</p>
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<label for="mail">Correo:</label>
+				<input formControlName="mail" name="mail" type="text" placeholder="mail" />
+			</div>
+			<div *ngIf="form.get('mail')?.errors && (form.get('mail')?.dirty ||
+				form.get('mail')?.touched)">
+				<p *ngIf="form.get('mail')?.hasError('required')">Field is required</p>
+				<p *ngIf="form.get('mail')?.hasError('email')">Wrong email format</p>
+				<p *ngIf="form.get('mail')?.hasError('minlength')">Min of 5 characters</p>
+				<p *ngIf="form.get('mail')?.hasError('maxlength')">Max of 10 characters</p>
+				<p *ngIf="form.get('mail')?.hasError('validUserMail')">The email already
+					exists</p>
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<label for="password">Contraseña:</label>
+				<input formControlName="password" name="password" type="password"
+					placeholder="Password" autocomplete="on" />
+			</div>
+			<div *ngIf="form.get('password')?.errors && (form.get('password')?.dirty ||
+				form.get('password')?.touched)">
+				<p *ngIf="form.get('password')?.hasError('required')">Field is required</p>
+				<p *ngIf="form.get('password')?.hasError('minlength')">Min of 8 characters</p>
+				<p *ngIf="form.get('password')?.hasError('maxlength')">Max of 10 characters</p>
+				<p *ngIf="form.get('password')?.hasError('pattern')">It's not safe</p>
+				<p *ngIf="form.get('password')?.hasError('noUpperCase')">Does not have
+					capital letters</p>
+				<p *ngIf="form.get('password')?.hasError('noLowerCase')">Does not have a
+					lowercase letter</p>
+				<p *ngIf="form.get('password')?.hasError('noNumeric')">has no numeric
+					character</p>
+				<p *ngIf="form.get('password')?.hasError('validPasswordStrength')">Not
+					secure enough</p>
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<label for="passwordConfirm">Confirmar Contraseña:</label>
+				<input formControlName="passwordConfirm" name="passwordConfirm"
+					type="password" placeholder="Confirm your password" autocomplete="on" />
+			</div>
+			<div *ngIf="form.get('passwordConfirm')?.errors &&
+				(form.get('passwordConfirm')?.dirty ||
+				form.get('passwordConfirm')?.touched)">
+				<p *ngIf="form.get('passwordConfirm')?.hasError('required')">Field is
+					required</p>
+				<p *ngIf="form.get('passwordConfirm')?.hasError('minlength')">Min of 8
+					characters</p>
+				<p *ngIf="form.get('passwordConfirm')?.hasError('maxlength')">Max of 10
+					characters</p>
+				<p *ngIf="form.get('passwordConfirm')?.hasError('noUpperCase')">Does not
+					have capital letters</p>
+				<p *ngIf="form.get('passwordConfirm')?.hasError('noLowerCase')">Does not
+					have a lowercase letter</p>
+				<p *ngIf="form.get('passwordConfirm')?.hasError('noNumeric')">has no numeric
+					character</p>
+				<p *ngIf="form.get('passwordConfirm')?.hasError('validPasswordStrength')">Not
+					secure enough</p>
+			</div>
+			<div *ngIf="form?.errors">Passwords do not match</div>
+		</div>
+
+		<div>
+			<button type="submit" [disabled]="form.invalid">Registro</button>
+		</div>
+	</form>
+
+	<ng-container>

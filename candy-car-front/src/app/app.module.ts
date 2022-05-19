@@ -1,20 +1,26 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app.component';
+import { NavbarComponent } from './candy-car/common/navbar/navbar.component';
+import { CommonModule } from '@angular/common';
+import { UserModule } from './candy-car/user/user.module';
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		NavbarComponent
 	],
 	imports: [
-		BrowserModule,
-		AppRoutingModule,
 		HttpClientModule,
+		AppRoutingModule,
+		CommonModule,
+		UserModule
 	],
-	providers: [],
+	providers: [
+	],
+	exports: [],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
