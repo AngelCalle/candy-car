@@ -10,4 +10,5 @@ export interface IValidPasswordStrength {
 	noUpperCase?: boolean,
 	noLowerCase?: boolean,
 	noNumeric?: boolean,
+	notSymbols?: boolean
 }

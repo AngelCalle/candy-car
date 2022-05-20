@@ -10,9 +10,11 @@ export class PasswordStrengthValidator {
 			return null;
 		}
 
-		const hasUpperCase: boolean = /[A-Z]+/.test(value);
-		const hasLowerCase: boolean = /[a-z]+/.test(value);
-		const hasNumeric: boolean = /[0-9]+/.test(value);
+		const hasUpperCase: boolean = new RegExp(/[A-Z]+/).test(value);
+		const hasLowerCase: boolean = new RegExp(/[a-z]+/).test(value);
+		const hasNumeric: boolean = new RegExp(/[0-9]+/).test(value);
+		const notSymbols: boolean = new RegExp(/[$%&? "'`]+/).test(value);
+
 		const passwordValid: boolean = hasUpperCase && hasLowerCase && hasNumeric;
 
 		if (!hasUpperCase) {
@@ -23,6 +25,9 @@ export class PasswordStrengthValidator {
 		}
 		if (!hasNumeric) {
 			return ({ noNumeric: true });
+		}
+		if (notSymbols) {
+			return ({ notSymbols: true });
 		}
 
 		return !passwordValid ? ({ validPasswordStrength: true }) : null;

@@ -13,6 +13,7 @@ import { IValidEqualPassword } from '../userModel';
 export class LoginComponent implements OnInit {
 
 	form?: FormGroup;
+	mailValid?: string;
 
 	constructor(
 		protected formBuilder: FormBuilder,
@@ -23,14 +24,15 @@ export class LoginComponent implements OnInit {
 	}
 
 	initForm(): void {
+		this.mailValid = `^[a-zA-Z0-9.!#$%++/=?^_{|}-~]+@[a-zA-Z0-9.-]+(?:\\.[[a-zA-Z0-9]{2,4}$)`;
 		this.form = new FormGroup(
 			{
 				mail: new FormControl('', Validators.compose([
 					UserMailValidator.validUserMail,
 					Validators.required,
-					Validators.email, // TODO: Change to a regular expression method that validates the ending with . and extension
 					Validators.minLength(6),
-					Validators.maxLength(30)])),
+					Validators.maxLength(30),
+					Validators.pattern(this.mailValid)])),
 				password: new FormControl('', Validators.compose([
 					PasswordStrengthValidator.validPasswordStrength,
 					Validators.required,

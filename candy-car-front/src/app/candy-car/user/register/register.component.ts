@@ -13,6 +13,9 @@ import { IValidEqualPassword } from '../userModel';
 export class RegisterComponent implements OnInit {
 
 	form?: FormGroup;
+	lettersAndAccents?: string;
+	unaccentedLettersAndNumbers?: string;
+	mailValid?: string;
 
 	constructor(
 		protected formBuilder: FormBuilder,
@@ -23,18 +26,29 @@ export class RegisterComponent implements OnInit {
 	}
 
 	initForm(): void {
+		this.lettersAndAccents = `^([a-z A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1])+$`;
+		this.unaccentedLettersAndNumbers = '[A-Za-z0-9]+';
+		this.mailValid = `^[a-zA-Z0-9.!#$%++/=?^_{|}-~]+@[a-zA-Z0-9.-]+(?:\.[[a-zA-Z0-9]{2,4}$)`;
 		this.form = new FormGroup(
 			{
 				name: new FormControl('', Validators.compose([
 					Validators.required,
 					Validators.minLength(3),
-					Validators.maxLength(10)])),
+					Validators.maxLength(33),
+					Validators.pattern(this.lettersAndAccents)
+				])),
+				nameUser: new FormControl('', Validators.compose([
+					Validators.required,
+					Validators.minLength(3),
+					Validators.maxLength(33),
+					Validators.pattern(this.unaccentedLettersAndNumbers)
+				])),
 				mail: new FormControl('', Validators.compose([
 					UserMailValidator.validUserMail,
 					Validators.required,
-					Validators.email, // TODO: Change to a regular expression method that validates the ending with . and extension
 					Validators.minLength(6),
-					Validators.maxLength(30)])),
+					Validators.maxLength(30),
+					Validators.pattern(this.mailValid)])),
 				password: new FormControl('', Validators.compose([
 					PasswordStrengthValidator.validPasswordStrength,
 					Validators.required,

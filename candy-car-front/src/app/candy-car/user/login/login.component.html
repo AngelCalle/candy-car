@@ -2,17 +2,18 @@
 
 	<form [formGroup]="form" (ngSubmit)="save()" novalidate autocomplete="off">
 		<div>
-			<div>
+			<div *ngIf="mailValid">
 				<label for="mail">Correo:</label>
 				<input formControlName="mail" name="mail" id="mail" type="email"
-					placeholder="mail" required minlength="6" maxlength="30" />
+					placeholder="mail" [pattern]="mailValid" required minlength="6"
+					maxlength="30" />
 			</div>
 			<div *ngIf="form.get('mail')?.errors && (form.get('mail')?.dirty ||
 				form.get('mail')?.touched)">
 				<p *ngIf="form.get('mail')?.hasError('required')">Field is required</p>
-				<p *ngIf="form.get('mail')?.hasError('email')">Wrong email format</p>
-				<p *ngIf="form.get('mail')?.hasError('minlength')">Min of 5 characters</p>
-				<p *ngIf="form.get('mail')?.hasError('maxlength')">Max of 10 characters</p>
+				<p *ngIf="form.get('mail')?.hasError('pattern')">Wrong email format</p>
+				<p *ngIf="form.get('mail')?.hasError('minlength')">Min of 6 characters</p>
+				<p *ngIf="form.get('mail')?.hasError('maxlength')">Max of 30 characters</p>
 				<p *ngIf="form.get('mail')?.hasError('validUserMail')">The email already
 					exists</p>
 			</div>
@@ -29,7 +30,7 @@
 				form.get('password')?.touched)">
 				<p *ngIf="form.get('password')?.hasError('required')">Field is required</p>
 				<p *ngIf="form.get('password')?.hasError('minlength')">Min of 8 characters</p>
-				<p *ngIf="form.get('password')?.hasError('maxlength')">Max of 10 characters</p>
+				<p *ngIf="form.get('password')?.hasError('maxlength')">Max of 20 characters</p>
 				<p *ngIf="form.get('password')?.hasError('pattern')">It's not safe</p>
 				<p *ngIf="form.get('password')?.hasError('noUpperCase')">Does not have
 					capital letters</p>
@@ -37,6 +38,8 @@
 					lowercase letter</p>
 				<p *ngIf="form.get('password')?.hasError('noNumeric')">has no numeric
 					character</p>
+				<p *ngIf="form.get('password')?.hasError('notSymbols')">Characters not
+					allowed</p>
 				<p *ngIf="form.get('password')?.hasError('validPasswordStrength')">Not
 					secure enough</p>
 			</div>
