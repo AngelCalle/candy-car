@@ -1,0 +1,7 @@
+com\candycar\users\dao\repository\UserRepository.class
+com\candycar\users\service\UserService.class
+com\candycar\users\service\impl\UserServiceImpl.class
+com\candycar\users\dao\model\User.class
+com\candycar\users\UsersCandyCarBackApplication.class
+com\candycar\users\configuration\WebConfiguration.class
+com\candycar\users\controller\UserController.class

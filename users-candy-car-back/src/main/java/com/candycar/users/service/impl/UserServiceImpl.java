@@ -20,5 +20,13 @@ public class UserServiceImpl implements UserService {
 	public Iterable<User> findAll() {
 		return userRepository.findAll();
 	}
-
+	
+	@Override
+	public Boolean existsByMailContainingIgnoreCase(String mail) {
+		try {
+			return userRepository.existsByMailContainingIgnoreCase(mail);
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

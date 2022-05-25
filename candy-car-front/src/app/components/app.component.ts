@@ -19,12 +19,12 @@ export class AppComponent implements OnInit {
 	}
 
 	getUser(): void {
-		this.userService.getUser()
+		this.userService.getExistEmail("candycar@mail.com")
 			.subscribe((data: any): any => {
-				if (data) {
+				//if (data) {
 					this.user = data;
 					console.log('📢 [app.component.ts:23]', data);
-				}
+				//}
 			});
 	}
 }
