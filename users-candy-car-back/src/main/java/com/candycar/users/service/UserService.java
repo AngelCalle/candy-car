@@ -4,8 +4,8 @@ import com.candycar.users.dao.model.User;
 
 public interface UserService {
 
-	public Iterable<User> findAll();
+	Iterable<User> findAll();
 	
-	public Boolean existsByMailContainingIgnoreCase(String mail);
+	Boolean existsByMail(String mail);
 
 }

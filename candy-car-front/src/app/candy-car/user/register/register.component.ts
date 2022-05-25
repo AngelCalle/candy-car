@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { UserService } from '../../api/service/user.service';
 import { EqualPasswordValidator } from '../../core/validators/equalPasswordValidator';
 import { PasswordStrengthValidator } from '../../core/validators/passwordStrengthValidator';
 import { UserMailValidator } from '../../core/validators/userMailValidator';
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
 
 	constructor(
 		protected formBuilder: FormBuilder,
+		public userService: UserService
 	) { }
 
 	ngOnInit() {
@@ -44,11 +46,12 @@ export class RegisterComponent implements OnInit {
 					Validators.pattern(this.unaccentedLettersAndNumbers)
 				])),
 				mail: new FormControl('', Validators.compose([
-					UserMailValidator.validUserMail,
 					Validators.required,
 					Validators.minLength(6),
 					Validators.maxLength(30),
-					Validators.pattern(this.mailValid)])),
+					Validators.pattern(this.mailValid)]),
+					UserMailValidator.validUserMail(this.userService)
+				),
 				password: new FormControl('', Validators.compose([
 					PasswordStrengthValidator.validPasswordStrength,
 					Validators.required,
@@ -63,7 +66,8 @@ export class RegisterComponent implements OnInit {
 				]))
 			}, (formGroup: AbstractControl): IValidEqualPassword | null => {
 				return EqualPasswordValidator.validEqualPassword(formGroup);
-			});
+			}
+		);
 	}
 
 	save(): void {

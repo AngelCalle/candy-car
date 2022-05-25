@@ -17,14 +17,13 @@ export class AppComponent implements OnInit {
 	ngOnInit(): void {
 		this.getUser();
 	}
-
 	getUser(): void {
-		this.userService.getExistEmail("candycar@mail.com")
+		this.userService.getUser()
 			.subscribe((data: any): any => {
-				//if (data) {
+				if (data) {
 					this.user = data;
 					console.log('📢 [app.component.ts:23]', data);
-				//}
+				}
 			});
 	}
 }

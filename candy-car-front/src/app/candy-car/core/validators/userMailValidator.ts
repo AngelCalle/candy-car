@@ -1,33 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { map, switchMap, timer, of } from 'rxjs';
 import { UserService } from '../../api/service/user.service';
-import { IValidUserMail } from '../../user/userModel';
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 export class UserMailValidator {
-	constructor(
-		private readonly userService: UserService
-	) { }
+	//https://es.stackoverflow.com/questions/474199/problema-con-la-validaci%C3%B3n-as%C3%ADncrona-de-email-formulario-reactivo-angular
+	static validUserMail(us: UserService) {
+		return (control: AbstractControl) => {
+			if (control.pristine) {
+				return of(null);
+			}
 
-	getExistMail(mail:string): boolean {
-		let response: boolean = false;
-		this.userService.getExistEmail(mail)
-			.subscribe((data: boolean): void => {
-				response = data;
-			});
-			return response ? true:false;
+			return timer(500).pipe(
+				switchMap(() => {
+					return us.getExistEmail(control.value)
+				}), map(resp => resp ? null : { validUserMail: true })
+			)
+		}
+
 	}
-	//Check static
-	static validUserMail(fc: AbstractControl) {
-        if (fc.value.toLowerCase()) {
-            if (this.getExistEmail(fc.value.toLowerCase())) {
-                return ({ validUserMail: true });
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
 }

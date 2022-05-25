@@ -6,9 +6,9 @@ export class EqualPasswordValidator {
 
 	static validEqualPassword(formGroup: AbstractControl): IValidEqualPassword | null {
 		if (formGroup.value?.password === formGroup.value?.passwordConfirm) {
-			return ({ validEqualPassword: true });
-		} else {
 			return null;
+		} else {
+			return ({ validEqualPassword: true });
 		}
 	}
 

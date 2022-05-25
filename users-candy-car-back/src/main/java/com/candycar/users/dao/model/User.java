@@ -18,26 +18,26 @@ import lombok.Setter;
 @Setter
 @Table(name = "USER")
 public class User implements Serializable {
-	
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue
-    @Column(name = "ID")
-    private Integer id;
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
+	private Integer id;
 
 	@NonNull
 	@Column(name = "NAME")
 	private String name;
-	
+
 	@NonNull
 	@Column(name = "USER_NAME")
 	private String userName;
-	
+
 	@NonNull
 	@Column(name = "MAIL")
 	private String mail;
-	
+
 	@NonNull
 	@Column(name = "PASSWORD")
 	private String password;

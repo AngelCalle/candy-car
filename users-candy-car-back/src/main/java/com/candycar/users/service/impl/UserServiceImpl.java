@@ -14,19 +14,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    protected final UserRepository userRepository;
+	protected final UserRepository userRepository;
 
 	@Override
 	public Iterable<User> findAll() {
 		return userRepository.findAll();
 	}
-	
+
 	@Override
-	public Boolean existsByMailContainingIgnoreCase(String mail) {
-		try {
-			return userRepository.existsByMailContainingIgnoreCase(mail);
-		} catch (Exception e) {
-			return false;
-		}
+	public Boolean existsByMail(String mail) {
+		return userRepository.existsByMail(mail);
 	}
+
 }

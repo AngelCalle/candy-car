@@ -9,7 +9,7 @@ import com.candycar.users.dao.model.User;
 @Repository
 @Transactional
 public interface UserRepository extends JpaRepository<User, Integer> {
-	
-	Boolean existsByMailContainingIgnoreCase(String mail);
-	
+
+	Boolean existsByMail(String mail);
+
 }

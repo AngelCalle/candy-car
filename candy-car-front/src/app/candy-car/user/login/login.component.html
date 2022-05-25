@@ -14,8 +14,6 @@
 				<p *ngIf="form.get('mail')?.hasError('pattern')">Wrong email format</p>
 				<p *ngIf="form.get('mail')?.hasError('minlength')">Min of 6 characters</p>
 				<p *ngIf="form.get('mail')?.hasError('maxlength')">Max of 30 characters</p>
-				<p *ngIf="form.get('mail')?.hasError('validUserMail')">The email already
-					exists</p>
 			</div>
 		</div>
 
