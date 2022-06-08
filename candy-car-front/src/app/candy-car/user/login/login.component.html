@@ -1,51 +1,61 @@
 <ng-container *ngIf="form">
 
-	<form [formGroup]="form" (ngSubmit)="save()" novalidate autocomplete="off">
-		<div>
-			<div *ngIf="mailValid">
-				<label for="mail">Correo:</label>
-				<input formControlName="mail" name="mail" id="mail" type="email"
-					placeholder="mail" [pattern]="mailValid" required minlength="6"
-					maxlength="30" />
-			</div>
-			<div *ngIf="form.get('mail')?.errors && (form.get('mail')?.dirty ||
-				form.get('mail')?.touched)">
-				<p *ngIf="form.get('mail')?.hasError('required')">Field is required</p>
-				<p *ngIf="form.get('mail')?.hasError('pattern')">Wrong email format</p>
-				<p *ngIf="form.get('mail')?.hasError('minlength')">Min of 6 characters</p>
-				<p *ngIf="form.get('mail')?.hasError('maxlength')">Max of 30 characters</p>
-			</div>
-		</div>
+	<div class="container mt-5">
+		<div class="row justify-content-md-center">
+			<form [formGroup]="form" (ngSubmit)="save()" novalidate autocomplete="off"
+				class="col-4">
+				<h3>Inicio de sesion</h3>
+				<div class="mt-2">
+					<div *ngIf="mailValid">
+						<label for="mail" class="form-label">Correo:</label>
+						<input formControlName="mail" name="mail" id="mail" type="email"
+							placeholder="mail" [pattern]="mailValid" required minlength="6"
+							maxlength="30" class="form-control" />
+					</div>
+					<div *ngIf="form.get('mail')?.errors && (form.get('mail')?.dirty ||
+						form.get('mail')?.touched)" class="mt-2 text-danger">
+						<p *ngIf="form.get('mail')?.hasError('required')">Field is required</p>
+						<p *ngIf="form.get('mail')?.hasError('pattern')">Wrong email format</p>
+						<p *ngIf="form.get('mail')?.hasError('minlength')">Min of 6 characters</p>
+						<p *ngIf="form.get('mail')?.hasError('maxlength')">Max of 30 characters</p>
+					</div>
+				</div>
 
-		<div>
-			<div>
-				<label for="password">Contraseña:</label>
-				<input formControlName="password" name="password" id="password"
-					type="password" placeholder="Password" autocomplete="off" required
-					minlength="8" maxlength="20" />
-			</div>
-			<div *ngIf="form.get('password')?.errors && (form.get('password')?.dirty ||
-				form.get('password')?.touched)">
-				<p *ngIf="form.get('password')?.hasError('required')">Field is required</p>
-				<p *ngIf="form.get('password')?.hasError('minlength')">Min of 8 characters</p>
-				<p *ngIf="form.get('password')?.hasError('maxlength')">Max of 20 characters</p>
-				<p *ngIf="form.get('password')?.hasError('pattern')">It's not safe</p>
-				<p *ngIf="form.get('password')?.hasError('noUpperCase')">Does not have
-					capital letters</p>
-				<p *ngIf="form.get('password')?.hasError('noLowerCase')">Does not have a
-					lowercase letter</p>
-				<p *ngIf="form.get('password')?.hasError('noNumeric')">has no numeric
-					character</p>
-				<p *ngIf="form.get('password')?.hasError('notSymbols')">Characters not
-					allowed</p>
-				<p *ngIf="form.get('password')?.hasError('validPasswordStrength')">Not
-					secure enough</p>
-			</div>
-		</div>
+				<div class="mt-2">
+					<div>
+						<label for="password" class="form-label">Contraseña:</label>
+						<input formControlName="password" name="password" id="password"
+							type="password" placeholder="Password" autocomplete="off" required
+							minlength="8" maxlength="20" class="form-control" />
+					</div>
+					<div *ngIf="form.get('password')?.errors && (form.get('password')?.dirty ||
+						form.get('password')?.touched)" class="mt-2 text-danger">
+						<p *ngIf="form.get('password')?.hasError('required')">Field is required</p>
+						<p *ngIf="form.get('password')?.hasError('minlength')">Min of 8 characters</p>
+						<p *ngIf="form.get('password')?.hasError('maxlength')">Max of 20
+							characters</p>
+						<p *ngIf="form.get('password')?.hasError('pattern')">It's not safe</p>
+						<p *ngIf="form.get('password')?.hasError('noUpperCase')">Does not have
+							capital letters</p>
+						<p *ngIf="form.get('password')?.hasError('noLowerCase')">Does not have a
+							lowercase letter</p>
+						<p *ngIf="form.get('password')?.hasError('noNumeric')">has no numeric
+							character</p>
+						<p *ngIf="form.get('password')?.hasError('notSymbols')">Characters not
+							allowed</p>
+						<p *ngIf="form.get('password')?.hasError('validPasswordStrength')">Not
+							secure enough</p>
+					</div>
+				</div>
 
-		<div>
-			<button type="submit" [disabled]="form.invalid">Registro</button>
+				<div class="row">
+					<div class="col-7"></div>
+					<div class="col-5">
+						<button type="submit" [disabled]="form.invalid" class="btn btn-dark mt-3">Inicia
+							sesion</button>
+					</div>
+				</div>
+			</form>
 		</div>
-	</form>
-
+	</div>
 	<ng-container>

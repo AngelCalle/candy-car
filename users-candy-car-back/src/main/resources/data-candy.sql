@@ -1,1 +1,1 @@
-INSERT INTO USER VALUES (1, 'ONE', 'candycar', 'candycar@mail.com', 'TestAAA');
+INSERT INTO USER VALUES (1, 'ONE', 'candycar', 'candycar@mail.com', 'daAs43_245e');

@@ -6,6 +6,12 @@ public interface UserService {
 
 	Iterable<User> findAll();
 	
-	Boolean existsByMail(String mail);
+	Boolean existsByMail(String mail);	
+
+	User findByMailAndPassword(String mail, String password);
+	
+	User save(User user);
+	
+	User editUser(String id, User user);
 
 }

@@ -1,1 +1,126 @@
-<p>profile works!</p>
+<ng-container *ngIf="form">
+
+	<div class="container mt-5">
+		<div class="row justify-content-md-center">
+
+			<form [formGroup]="form" (ngSubmit)="save()" novalidate autocomplete="off"
+				class="col-4">
+				<h3>Modificar usuario</h3>
+				<div class="mt-2">
+					<div *ngIf="lettersAndAccents">
+						<label for="name" class="form-label">Nombre:</label>
+						<input formControlName="name" name="name" id="name" type="text"
+							placeholder="name" [pattern]="lettersAndAccents"
+							minlength="3" maxlength="33" class="form-control" />
+					</div>
+					<div *ngIf="form.get('name')?.errors && (form.get('name')?.dirty ||
+						form.get('name')?.touched)" class="mt-2 text-danger">
+						<p *ngIf="form.get('name')?.hasError('minlength')">Min of 3 characters</p>
+						<p *ngIf="form.get('name')?.hasError('maxlength')">Max of 33 characters</p>
+						<p *ngIf="form.get('name')?.hasError('pattern')">Wrong name formats</p>
+					</div>
+				</div>
+
+				<div class="mt-2">
+					<div *ngIf="unaccentedLettersAndNumbers">
+						<label for="nameUser" class="form-label">Name User:</label>
+						<input formControlName="nameUser" name="nameUser" id="nameUser"
+							type="text"
+							placeholder="nameUser" [pattern]="unaccentedLettersAndNumbers"
+							minlength="3" maxlength="33" class="form-control" />
+					</div>
+					<div *ngIf="form.get('nameUser')?.errors && (form.get('nameUser')?.dirty ||
+						form.get('nameUser')?.touched)" class="mt-2 text-danger">
+						<p *ngIf="form.get('nameUser')?.hasError('minlength')">Min of 3 characters</p>
+						<p *ngIf="form.get('nameUser')?.hasError('maxlength')">Max of 33
+							characters</p>
+						<p *ngIf="form.get('nameUser')?.hasError('pattern')">Only letters without
+							accent and numbers</p>
+					</div>
+				</div>
+
+				<div class="mt-2">
+					<div *ngIf="mailValid">
+						<label for="mail" class="form-label">Correo:</label>
+						<input formControlName="mail" name="mail" id="mail" type="email"
+							placeholder="mail" [pattern]="mailValid"
+							minlength="6" maxlength="30" class="form-control" />
+					</div>
+					<div *ngIf="form.get('mail')?.errors && (form.get('mail')?.dirty ||
+						form.get('mail')?.touched)" class="mt-2 text-danger">
+						<p *ngIf="form.get('mail')?.hasError('pattern')">Wrong email format</p>
+						<p *ngIf="form.get('mail')?.hasError('minlength')">Min of 6 characters</p>
+						<p *ngIf="form.get('mail')?.hasError('maxlength')">Max of 30 characters</p>
+						<p *ngIf="form.get('mail')?.hasError('validUserMail')">The email already
+							exists</p>
+					</div>
+				</div>
+
+				<div class="mt-2">
+					<div>
+						<label for="password" class="form-label">Contraseña:</label>
+						<input formControlName="password" name="password" id="password"
+							type="password"
+							placeholder="Password" autocomplete="off"
+							minlength="8" maxlength="20" class="form-control" />
+					</div>
+					<div *ngIf="form.get('password')?.errors && (form.get('password')?.dirty ||
+						form.get('password')?.touched)" class="mt-2 text-danger">
+						<p *ngIf="form.get('password')?.hasError('minlength')">Min of 8 characters</p>
+						<p *ngIf="form.get('password')?.hasError('maxlength')">Max of 20
+							characters</p>
+						<p *ngIf="form.get('password')?.hasError('pattern')">It's not safe</p>
+						<p *ngIf="form.get('password')?.hasError('noUpperCase')">Does not have
+							capital letters</p>
+						<p *ngIf="form.get('password')?.hasError('noLowerCase')">Does not have a
+							lowercase letter</p>
+						<p *ngIf="form.get('password')?.hasError('noNumeric')">has no numeric
+							character</p>
+						<p *ngIf="form.get('password')?.hasError('notSymbols')">Characters not
+							allowed</p>
+						<p *ngIf="form.get('password')?.hasError('validPasswordStrength')">Not
+							secure enough</p>
+					</div>
+				</div>
+
+				<div class="mt-2">
+					<div>
+						<label for="passwordConfirm" class="form-label">Confirmar Contraseña:</label>
+						<input formControlName="passwordConfirm" name="passwordConfirm"
+							id="passwordConfirm"
+							type="password" placeholder="Confirm your password" autocomplete="off"
+							minlength="8" maxlength="20" class="form-control" />
+					</div>
+					<div *ngIf="form.get('passwordConfirm')?.errors &&
+						(form.get('passwordConfirm')?.dirty ||
+						form.get('passwordConfirm')?.touched)" class="mt-2 text-danger">
+						<p *ngIf="form.get('passwordConfirm')?.hasError('minlength')">Min of 8
+							characters</p>
+						<p *ngIf="form.get('passwordConfirm')?.hasError('maxlength')">Max of 20
+							characters</p>
+						<p *ngIf="form.get('passwordConfirm')?.hasError('noUpperCase')">Does not
+							have capital letters</p>
+						<p *ngIf="form.get('passwordConfirm')?.hasError('noLowerCase')">Does not
+							have a lowercase letter</p>
+						<p *ngIf="form.get('passwordConfirm')?.hasError('noNumeric')">has no
+							numeric
+							character</p>
+						<p *ngIf="form.get('password')?.hasError('notSymbols')">Characters not
+							allowed</p>
+						<p *ngIf="form.get('passwordConfirm')?.hasError('validPasswordStrength')">Not
+							secure enough</p>
+					</div>
+					<div *ngIf="form?.errors">Passwords do not match</div>
+				</div>
+
+				<div class="row">
+					<div class="col-8"></div>
+					<div class="col-4">
+						<button type="submit" [disabled]="form.invalid" class="btn btn-dark mt-3">Guardar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<ng-container>

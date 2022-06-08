@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../../api/service/user.service';
 import { EqualPasswordValidator } from '../../core/validators/equalPasswordValidator';
 import { PasswordStrengthValidator } from '../../core/validators/passwordStrengthValidator';
@@ -8,8 +9,7 @@ import { IValidEqualPassword } from '../userModel';
 
 @Component({
 	selector: 'app-register',
-	templateUrl: './register.component.html',
-	styleUrls: ['./register.component.scss']
+	templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
 
@@ -19,8 +19,9 @@ export class RegisterComponent implements OnInit {
 	mailValid?: string;
 
 	constructor(
+		protected router: Router,
+		protected userService: UserService,
 		protected formBuilder: FormBuilder,
-		public userService: UserService
 	) { }
 
 	ngOnInit() {
@@ -72,10 +73,25 @@ export class RegisterComponent implements OnInit {
 
 	save(): void {
 		if (this.form?.value) {
-			console.log({
-				values: this.form.value
-			});
+			console.log(this.form.value);
+			const USER = {
+				name: this.form.value.name,
+				userName: this.form.value.nameUser,
+				mail: this.form.value.mail,
+				password: this.form.value.password
+			};
+			this.postRegister(USER);
 		}
+	}
+
+	postRegister(user: any): void {
+		this.userService.postRegister(user)
+			.subscribe((data: any): any => {
+				if (data) {
+					localStorage.setItem('user', JSON.stringify(data));
+					this.router.navigate(['profile']);
+				}
+			});
 	}
 
 }

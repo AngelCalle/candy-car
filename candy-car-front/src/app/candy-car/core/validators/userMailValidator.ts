@@ -6,7 +6,7 @@ import { UserService } from '../../api/service/user.service';
 	providedIn: 'root'
 })
 export class UserMailValidator {
-	//https://es.stackoverflow.com/questions/474199/problema-con-la-validaci%C3%B3n-as%C3%ADncrona-de-email-formulario-reactivo-angular
+	// https://es.stackoverflow.com/questions/474199/problema-con-la-validaci%C3%B3n-as%C3%ADncrona-de-email-formulario-reactivo-angular
 	static validUserMail(us: UserService) {
 		return (control: AbstractControl) => {
 			if (control.pristine) {
@@ -16,9 +16,9 @@ export class UserMailValidator {
 			return timer(500).pipe(
 				switchMap(() => {
 					return us.getExistEmail(control.value)
-				}), map(resp => resp ? null : { validUserMail: true })
+				}), map(resp => resp ? { validUserMail: true } : null)
 			)
 		}
-
 	}
+
 }

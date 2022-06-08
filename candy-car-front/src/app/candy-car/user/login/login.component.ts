@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { EqualPasswordValidator } from '../../core/validators/equalPasswordValidator';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../../api/service/user.service';
 import { PasswordStrengthValidator } from '../../core/validators/passwordStrengthValidator';
-import { UserMailValidator } from '../../core/validators/userMailValidator';
-import { IValidEqualPassword } from '../userModel';
 
 @Component({
 	selector: 'app-login',
-	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.scss']
+	templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
 
@@ -16,7 +14,9 @@ export class LoginComponent implements OnInit {
 	mailValid?: string;
 
 	constructor(
+		protected router: Router,
 		protected formBuilder: FormBuilder,
+		protected readonly userService: UserService
 	) { }
 
 	ngOnInit() {
@@ -47,7 +47,18 @@ export class LoginComponent implements OnInit {
 			console.log({
 				values: this.form.value
 			});
+			this.getLogin(this.form.value.mail.toLowerCase(), this.form.value.password);
 		}
+	}
+
+	getLogin(mail: string, password: string): void {
+		this.userService.getLogin(mail, password)
+			.subscribe((data: any): any => {
+				if (data) {
+					localStorage.setItem('user', JSON.stringify(data));
+					this.router.navigate(['profile']);
+				}
+			});
 	}
 
 }
