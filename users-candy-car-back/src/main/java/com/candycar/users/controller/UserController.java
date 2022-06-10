@@ -2,6 +2,7 @@ package com.candycar.users.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +53,11 @@ public class UserController {
 	@PutMapping("/edit-user/{id}")
 	public ResponseEntity<User> editUser(@PathVariable("id") String id, @RequestBody(required = true) User user) {
 		return new ResponseEntity<>(userService.editUser(id, user), HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id) {
+		return new ResponseEntity<>(userService.deleteById(id), HttpStatus.CREATED);
 	}
 
 }

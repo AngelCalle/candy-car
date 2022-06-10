@@ -14,6 +14,7 @@ export class UserService {
 	#GET_LOGIN = environment.user + 'login/';
 	#POST_REGISTER = environment.user + 'register/';
 	#PUT_EDIT_USER = environment.user + 'edit-user/';
+	#DELETE_USER = environment.user;
 
 	constructor(
 		private readonly httpClient: HttpClient
@@ -48,6 +49,12 @@ export class UserService {
 		const body = user;
 		return this.httpClient
 			.put<any[]>(this.#PUT_EDIT_USER + body.id, body)
+			.pipe(catchError(this.handleError));
+	}
+
+	deleteUser(id: any): Observable<any> {
+		return this.httpClient
+			.delete<any[]>(this.#DELETE_USER + id,)
 			.pipe(catchError(this.handleError));
 	}
 

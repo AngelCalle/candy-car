@@ -14,4 +14,5 @@ public interface UserService {
 	
 	User editUser(String id, User user);
 
+	Boolean deleteById(Integer id);	
 }

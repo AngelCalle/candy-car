@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
 	constructor(
 		protected router: Router,
 		protected formBuilder: FormBuilder,
-		protected readonly userService: UserService
+		protected readonly userService: UserService,
+
 	) { }
 
 	ngOnInit() {
@@ -57,6 +58,8 @@ export class LoginComponent implements OnInit {
 				if (data) {
 					localStorage.setItem('user', JSON.stringify(data));
 					this.router.navigate(['profile']);
+				} else {
+					alert('El inicio de sesion a fallado');
 				}
 			});
 	}

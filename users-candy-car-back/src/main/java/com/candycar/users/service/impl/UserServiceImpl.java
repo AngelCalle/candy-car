@@ -47,4 +47,14 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user_new);
 	}
 
+	@Override
+	public Boolean deleteById(Integer id) {
+		try {
+			userRepository.deleteById(id);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

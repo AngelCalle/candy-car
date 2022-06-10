@@ -98,4 +98,18 @@ export class ProfileComponent implements OnInit {
 			});
 	}
 
+	deleteUser(): void {
+		const userStorage = localStorage.getItem('user');
+		if (userStorage) {
+			const userFormat = JSON.parse(userStorage);
+			this.userService.deleteUser(userFormat.id)
+				.subscribe((data: any): any => {
+					if (data) {
+						localStorage.removeItem('user');
+						this.router.navigate(['register']);
+					}
+				});
+		}
+	}
+
 }

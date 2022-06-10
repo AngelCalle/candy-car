@@ -114,7 +114,13 @@
 				</div>
 
 				<div class="row">
-					<div class="col-8"></div>
+					<div class="col-8">
+						<button type="button" (click)="deleteUser()" [disabled]="form.invalid"
+							class="btn
+							btn-danger mt-3">
+							Eliminar cuenta
+						</button>
+					</div>
 					<div class="col-4">
 						<button type="submit" [disabled]="form.invalid" class="btn btn-dark mt-3">Guardar</button>
 					</div>
